@@ -138,29 +138,45 @@ function getRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function generateRandomLogic() {
     const mood = document.getElementById('random-mood').value;
     const p = partsDict[mood];
+    
+    // 左右連動のチェック状態
     const isSym = document.getElementById('random-sync-check').checked; 
 
-    const lD = getRandom(p.decosL);
-    const lF = getRandom(p.framesL);
-    const lEar = getRandom(p.earsL);
-    const lEb = getRandom(p.eyebrowsL);
-    const lC = getRandom(p.cheeksL);
-    const lE = getRandom(p.eyesL);
-    const m  = getRandom(p.mouths);
+    // 詳細設定のチェック状態を取得
+    const hasFrame = document.getElementById('gen-frame').checked;
+    const hasEar = document.getElementById('gen-ear').checked;
+    const hasEb = document.getElementById('gen-eyebrow').checked;
+    const hasCheek = document.getElementById('gen-cheek').checked;
+    const hasDeco = document.getElementById('gen-deco').checked;
+
+    // --- 1. 左側のパーツを決定 ---
+    const lD = hasDeco ? getRandom(p.decosL) : "";
+    const lF = hasFrame ? getRandom(p.framesL) : "";
+    const lEar = hasEar ? getRandom(p.earsL) : "";
+    const lEb = hasEb ? getRandom(p.eyebrowsL) : "";
+    const lC = hasCheek ? getRandom(p.cheeksL) : "";
+    const lE = getRandom(p.eyesL); // 目は必須
+    const m  = getRandom(p.mouths); // 口も必須
     
+    // --- 2. 右側パーツの取得用ヘルパー ---
     const getRight = (leftPart, rightArray) => {
-        if (!isSym) return getRandom(rightArray);
+        if (!isSym) return getRandom(rightArray); // カオスモード
+        // 対称辞書にあれば変換、なければそのまま同じ文字を使う
         return symmetryDict[leftPart] !== undefined ? symmetryDict[leftPart] : leftPart;
     };
 
+    // --- 3. 右側のパーツを決定（チェック状態を反映） ---
     const rE = getRight(lE, p.eyesR);
-    const rC = getRight(lC, p.cheeksR);
-    const rEb = getRight(lEb, p.eyebrowsR);
-    const rEar = getRight(lEar, p.earsR);
-    const rF = getRight(lF, p.framesR);
-    const rD = getRight(lD, p.decosR);
+    const rC = hasCheek ? getRight(lC, p.cheeksR) : "";
+    const rEb = hasEb ? getRight(lEb, p.eyebrowsR) : "";
+    const rEar = hasEar ? getRight(lEar, p.earsR) : "";
+    const rF = hasFrame ? getRight(lF, p.framesR) : "";
+    const rD = hasDeco ? getRight(lD, p.decosR) : "";
 
+    // --- 4. 結合（順番は 装飾-輪郭-耳-眉-ほっぺ-目-口-目-ほっぺ-眉-耳-輪郭-装飾） ---
     const kaomoji = `${lD}${lF}${lEar}${lEb}${lC}${lE}${m}${rE}${rC}${rEb}${rEar}${rF}${rD}`;
+    
+    // プレビューに反映
     document.getElementById('preview').value = kaomoji; 
 }
 
