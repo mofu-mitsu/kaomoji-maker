@@ -1,0 +1,399 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GNTX973GET"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GNTX973GET');
+    </script>
+    <!-- SEO: タイトルは重要！検索されやすいワードを盛り込む -->
+    <title>かわいい顔文字メーカー ✨ オリジナル特殊文字・量産型を自動生成！</title>
+    <!-- SEO: 検索結果の下に出る説明文 -->
+    <meta name="description" content="組み合わせ無限大！量産型、地雷系、特殊文字、おっさん顔文字からカオスな変顔まで、自分だけのオリジナル顔文字を作れる無料ツールです。ワンクリックでコピー＆X(Twitter)へシェア可能！">
+    <meta name="keywords" content="顔文字,メーカー,かわいい,特殊文字,量産型,地雷系,コピー,自動生成,ランダム,コピペ">
+    
+    <!-- OGPタグ (XやLINEでシェアされた時の表示設定) -->
+    <meta property="og:title" content="かわいい顔文字メーカー ✨ 特殊文字・量産型を自動生成！">
+    <meta property="og:description" content="組み合わせ無限大！自分だけのオリジナル顔文字を作れる無料ツールです。ワンクリックでコピー＆シェア！">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mofu-mitsu.github.io/kaomoji-maker/">
+    <meta property="og:site_name" content="顔文字メーカー">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Favicon (絵文字の✨をそのままアイコンにする裏技！) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>✨</text></svg>">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- トップへワープするボタン -->
+<button id="page-top-btn" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></button>
+
+<div class="container">
+    <!-- ホームへ戻るリンク -->
+    <div class="nav-links">
+        <a href="https://mofu-mitsu.github.io/" class="home-link"><i class="fa-solid fa-house"></i> ホームへ戻る</a>
+    </div>
+    <div class="header-area">
+        <h1><i class="fa-solid fa-wand-magic-sparkles"></i> 顔文字メーカー</h1>
+        <button class="btn-help" onclick="openModal()"><i class="fa-solid fa-circle-question"></i> 使い方</button>
+    </div>
+
+    <!-- プレビュー＆アクション -->
+    <div class="preview-box">
+        <input type="text" class="preview-input" id="preview" value="(´・ω・｀)">
+        <div class="action-buttons">
+            <button class="btn btn-update" onclick="updatePreview()"><i class="fa-solid fa-arrows-rotate"></i> 反映</button>
+            <button class="btn btn-copy" onclick="copyKaomoji()"><i class="fa-regular fa-copy"></i> コピー</button>
+            <button class="btn btn-share" onclick="shareKaomoji()"><i class="fa-solid fa-arrow-up-from-bracket"></i> 共有</button>
+            <button class="btn btn-reset" onclick="resetAll()"><i class="fa-solid fa-trash-can"></i> クリア</button>
+        </div>
+    </div>
+
+    <!-- カスタム作成 -->
+    <h2 class="section-title">
+        <span><i class="fa-solid fa-sliders"></i> カスタム</span>
+        <label class="sync-toggle">
+            <input type="checkbox" id="sync-check" checked onchange="forceSync()">
+            <i class="fa-solid fa-link"></i> 左右連動
+        </label>
+    </h2>
+    
+    <div class="control-grid">
+        <!-- 左側パーツ -->
+        <div class="part-column">
+            <h3><i class="fa-solid fa-hand-point-left"></i> 左側</h3>
+            <div class="input-group">
+                <label>装飾</label>
+                <select id="deco-l-sel" onchange="applySelect('deco-l', this.value); syncLeftToRight('deco'); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="〜">〜</option>
+                    <option value="ヽ">ヽ</option>
+                    <option value="∠">∠</option>
+                    <option value="ԅ">ԅ</option>
+                    <option value="💰">💰</option>
+                    <option value="🍅">🍅</option>
+                    <option value="Σ">Σ</option>
+                    <option value="¿?">¿?</option>
+                    <option value="└">└</option>
+                    <option value="‹‹\">‹‹\</option>
+                    <option value="ꧦ𛰙᭜">ꧦ𛰙᭜ (カオス)</option>
+                </select>
+                <input type="text" id="deco-l-val" oninput="syncLeftToRight('deco'); updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>輪郭</label>
+                <select id="frame-l-sel" onchange="applySelect('frame-l', this.value); syncLeftToRight('frame'); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="(">(</option>
+                    <option value="【">【</option>
+                    <option value="⊂(">⊂(</option>
+                    <option value="(ง">(ง</option>
+                    <option value="|　">|　</option>
+                    <option value="｡ﾟ(ﾟ">｡ﾟ(ﾟ</option>
+                    <option value="(๑">(๑</option>
+                </select>
+                <input type="text" id="frame-l-val" value="(" oninput="syncLeftToRight('frame'); updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>耳</label>
+                <select id="ear-l-sel" onchange="applySelect('ear-l', this.value); syncLeftToRight('ear'); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="ʕ">ʕ (くま)</option>
+                    <option value="ʕ̢̣̣̣">ʕ̢̣̣̣ (もふ)</option>
+                    <option value="₍ᐢ">₍ᐢ (うさぎ)</option>
+                    <option value="ฅ^">ฅ^ (ねこ)</option>
+                    <option value="૮꒰">૮꒰ (いぬ)</option>
+                    <option value="꒰՞">꒰՞ (たれ耳)</option>
+                    <option value="ᐢ">ᐢ</option>
+                    <option value="𑁊^">𑁊^</option>
+                    <option value="^𑁊">^𑁊</option>
+                </select>
+                <input type="text" id="ear-l-val" oninput="syncLeftToRight('ear'); updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>眉毛</label>
+                <select id="eyebrow-l-sel" onchange="applySelect('eyebrow-l', this.value); syncLeftToRight('eyebrow'); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="´">´ (ハの字)</option>
+                    <option value="｀">｀ (つり眉)</option>
+                    <option value=" ิ"> ิ (キモ)</option>
+                    <option value="◟">◟</option>
+                </select>
+                <input type="text" id="eyebrow-l-val" value="´" oninput="syncLeftToRight('eyebrow'); updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>ほっぺ</label>
+                <select id="cheek-l-sel" onchange="applySelect('cheek-l', this.value); syncLeftToRight('cheek'); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="*">*</option>
+                    <option value="◍">◍</option>
+                    <option value="///">///</option>
+                    <option value="⸝⸝">⸝⸝</option>
+                    <option value="҉">҉</option>
+                    <option value="⑉">⑉</option>
+                    <option value="｡">｡</option>
+                </select>
+                <input type="text" id="cheek-l-val" oninput="syncLeftToRight('cheek'); updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>目</label>
+                <select id="eye-l-sel" onchange="applySelect('eye-l', this.value); syncLeftToRight('eye'); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="・">・</option>
+                    <option value=">">></option>
+                    <option value="∂">∂</option>
+                    <option value="ʚ̴̶̷̷">ʚ̴̶̷̷</option>
+                    <option value="⁰">⁰</option>
+                    <option value="✧">✧</option>
+                    <option value=" ﾟ"> ﾟ</option>
+                    <option value="᭜𖫴𖫰𖫱𖫳𖫲𖫲𖫳𖫴𖫰𖫱꛰ ">᭜𖫴𖫰𖫱𖫳𖫲𖫲𖫳𖫴𖫰𖫱꛰</option>
+                    <option value="·͡˔">·͡˔ (動物)</option>
+                    <option value="◉">◉</option>
+                    <option value="⚆">⚆</option>
+                    <option value="ಠ">ಠ</option>
+                    <option value="థ ">థ</option>
+                    <option value="👁">👁</option>
+                    <option value="'">'</option>
+                    <option value="˙">˙</option>
+                    <option value="･̆">･̆ (ブリーブ)</option>
+                    <option value="ㅎ">ㅎ (ハングル)</option>
+                    <option value="•">•</option>
+                    <option value="-᷄">-᷄ (ジト目)</option>
+                    <option value=".">.</option>
+                    <option value="ᴗ">ᴗ (にっこり)</option>
+                    <option value="o̴̶̷̤">o̴̶̷̤ (量産型ぴえん)</option>
+                    <option value="💲 ">💲</option>
+                    <option value="¥ ">¥</option>
+                    <option value="@ ">@</option>
+                    <option value="￢ ">￢</option>
+                    <option value="⩌ ">⩌</option>
+                </select>
+                <input type="text" id="eye-l-val" value="・" oninput="syncLeftToRight('eye'); updatePreview()">
+            </div>
+        </div>
+
+        <!-- 中央パーツ -->
+        <div class="part-column center-col">
+            <h3><i class="fa-solid fa-face-smile"></i> 中央</h3>
+            <div class="input-group">
+                <label>口・鼻</label>
+                <select id="mouth-sel" onchange="applySelect('mouth', this.value); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="ω">ω</option>
+                    <option value="A">A</option>
+                    <option value="▱">▱</option>
+                    <option value="Д">Д</option>
+                    <option value="v">v</option>
+                    <option value="﹀">﹀</option>
+                    <option value="x">x</option>
+                    <option value="ᐛ">ᐛ (パァ)</option>
+                    <option value="꒳">꒳</option>
+                    <option value="-">-</option>
+                    <option value="👄">👄</option>
+                    <option value=".">.</option>
+                    <option value="∀">∀</option>
+                    <option value="ᴗ">ᴗ</option>
+                    <option value="·̫">·̫ (猫口)</option>
+                    <option value="ﻌ">ﻌ (動物)</option>
+                    <option value="ོ">·ོ (鼻口)</option>
+                    <option value="∋ ">∋</option>
+                    <option value="Θ ">Θ</option>
+                    <option value="ʚ ">ʚ</option>
+                    <option value="Ⱉ">Ⱉ </option>
+                    <option value="ิټ"> ټ </option>
+                    <option value="ਊ">ਊ </option>
+                    <option value="ꎳ">ꎳ</option>
+                    <option value="౪">౪</option>
+                </select>
+                <input type="text" id="mouth-val" value="ω" oninput="updatePreview()">
+            </div>
+        </div>
+
+        <!-- 右側パーツ -->
+        <div class="part-column">
+            <h3><i class="fa-solid fa-hand-point-right"></i> 右側</h3>
+            <div class="input-group">
+                <label>目</label>
+                <select id="eye-r-sel" onchange="applySelect('eye-r', this.value); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="・">・</option>
+                    <option value=">">></option>
+                    <option value="∂">∂</option>
+                    <option value="ʚ̴̶̷̷">ʚ̴̶̷̷</option>
+                    <option value="⁰">⁰</option>
+                    <option value="✧">✧</option>
+                    <option value=" ﾟ"> ﾟ</option>
+                    <option value="᭜𖫴𖫰𖫱𖫳𖫲𖫲𖫳𖫴𖫰𖫱꛰ ">᭜𖫴𖫰𖫱𖫳𖫲𖫲𖫳𖫴𖫰𖫱꛰</option>
+                    <option value="·͡˔">·͡˔ (動物)</option>
+                    <option value="◉">◉</option>
+                    <option value="⚆">⚆</option>
+                    <option value="ಠ">ಠ</option>
+                    <option value="థ ">థ</option>
+                    <option value="👁">👁</option>
+                    <option value="'">'</option>
+                    <option value="˙">˙</option>
+                    <option value="･̆">･̆ (ブリーブ)</option>
+                    <option value="ㅎ">ㅎ (ハングル)</option>
+                    <option value="•">•</option>
+                    <option value="-᷄">-᷄ </option>
+                    <option value=".">.</option>
+                    <option value="ᴗ">ᴗ (にっこり)</option>
+                    <option value="o̴̶̷̤">o̴̶̷̤ (量産型ぴえん)</option>
+                    <option value="💲 ">💲</option>
+                    <option value="¥ ">¥</option>
+                    <option value="@ ">@</option>
+                    <option value="￢ ">￢</option>
+                    <option value="⩌ ">⩌</option>
+                </select>
+                <input type="text" id="eye-r-val" value="・" oninput="updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>ほっぺ</label>
+                <select id="cheek-r-sel" onchange="applySelect('cheek-r', this.value); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="*">*</option>
+                    <option value="◍">◍</option>
+                    <option value="///">///</option>
+                    <option value="⸝⸝">⸝⸝</option>
+                    <option value="҉">҉</option>
+                    <option value="⑉">⑉</option>
+                    <option value="｡">｡</option>
+                </select>
+                <input type="text" id="cheek-r-val" oninput="updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>眉毛</label>
+                <select id="eyebrow-r-sel" onchange="applySelect('eyebrow-r', this.value); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="｀">｀ (ハの字)</option>
+                    <option value="´">´ (つり眉)</option>
+                    <option value=" ิ"> ิ</option>
+                    <option value="◞">◞</option>
+                </select>
+                <input type="text" id="eyebrow-r-val" value="｀" oninput="updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>耳</label>
+                <select id="ear-r-sel" onchange="applySelect('ear-r', this.value); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="ʔ">ʔ</option>
+                    <option value="Ɂ̡̣̣̣">Ɂ̡̣̣̣</option>
+                    <option value="ᐢ₎">ᐢ₎</option>
+                    <option value="^ฅ">^ฅ</option>
+                    <option value="꒱ა">꒱ა</option>
+                    <option value="՞꒱">՞꒱</option>
+                    <option value="ᐢ">ᐢ</option>
+                    <option value="𑁊^">𑁊^</option>
+                    <option value="^𑁊">^𑁊</option>
+                </select>
+                <input type="text" id="ear-r-val" oninput="updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>輪郭</label>
+                <select id="frame-r-sel" onchange="applySelect('frame-r', this.value); updatePreview()">
+                    <option value="">なし</option>
+                    <option value=")">)</option>
+                    <option value="】">】</option>
+                    <option value=")⊃">)⊃</option>
+                    <option value=" )ง"> )ง</option>
+                    <option value="　|">　|</option>
+                    <option value="∩ﾟ)ﾟ｡">∩ﾟ)ﾟ｡</option>
+                    <option value=")">)</option>
+                </select>
+                <input type="text" id="frame-r-val" value=")" oninput="updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>装飾</label>
+                <select id="deco-r-sel" onchange="applySelect('deco-r', this.value); updatePreview()">
+                    <option value="">なし</option>
+                    <option value="〜">〜</option>
+                    <option value="ﾉ">ﾉ</option>
+                    <option value="ゝ">ゝ</option>
+                    <option value="ԅ">ԅ</option>
+                    <option value="💰">💰</option>
+                    <option value="🍅">🍅</option>
+                    <option value="¿?">¿?</option>
+                    <option value="└">└</option>
+                    <option value="‹‹\">‹‹\</option>
+                    <option value="ꧦ𛰙᭜">ꧦ𛰙᭜ (カオス)</option>
+                    <option value="ふぁっ">ふぁっ</option>
+                    <option value="ｷﾞｬｰｽ！！">ｷﾞｬｰｽ！！</option>
+                    <option value="ﾁｮﾄﾅﾆｲｯﾃﾙｶﾜｶﾝﾅｲ ">ﾁｮﾄﾅﾆｲｯﾃﾙｶﾜｶﾝﾅｲ</option>
+                </select>
+                <input type="text" id="deco-r-val" oninput="updatePreview()">
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔥 消えてたアクションテンプレ完全復活！ -->
+    <h2 class="section-title"><i class="fa-solid fa-fire"></i> アクション・テンプレ生成</h2>
+    <div class="flex-box template-box">
+        <select id="tmpl-type" onchange="generateTemplate()">
+            <option value="punch">パンチ！ 〇=͟͟͞͞〇=͟͟͞͞=( '-' 〇 )</option>
+            <option value="paradise">パラダイス 〇(* ॑꒳ ॑* )〇</option>
+            <option value="throw">投げる！ (っ'-')╮=͟͟͞͞〇</option>
+            <option value="both">両手持ち 〇(^o^)〇</option>
+            <option value="shrug">お手上げ 〇╮( ❛_❛ )╭〇</option>
+            <option value="suu">スッ… 〇( '-' 〇  )</option>
+            <option value="appeal">アピール！ ﾃｷｽﾄ(｢〇･ω･)｢〇</option>
+            <option value="yoshi">ヨシヨシ(　'ω')ﾉ"〇</option>
+            <option value="barrier">バリア (੭ ᐕ))੭*⁾⁾ 〇〇〇</option>
+        </select>
+        <input type="text" id="tmpl-item" value="🍅" placeholder="絵文字" oninput="generateTemplate()" style="width: 70px;">
+        <input type="text" id="tmpl-text" value="ﾄﾏﾄﾊﾟﾝﾁ" placeholder="語尾/先頭" oninput="generateTemplate()">
+    </div>
+
+    <!-- 🎲 ランダム自動生成（weirdも完全復活！） -->
+    <h2 class="section-title">
+        <span><i class="fa-solid fa-dice"></i> ランダム生成</span>
+        <label class="sync-toggle random-sync">
+            <input type="checkbox" id="random-sync-check" checked>
+            <i class="fa-solid fa-link"></i> 左右連動
+        </label>
+    </h2>
+        <div class="flex-box random-box">
+            <select id="random-mood">
+                <option value="normal">ノーマル</option>
+                <option value="cute">地雷・もふもふ</option>
+                <option value="animal">動物(犬・猫・くま等)</option>
+                <option value="weird">カオス・変顔・AA系</option>
+                <option value="creepy">キモい・狂気系</option>
+            </select>
+            <button class="btn btn-primary" onclick="generateRandomLogic()">🎲 自動生成する！</button>
+        </div>
+
+    </div> <!-- 🌟 白い枠（container）の終了！ -->
+
+    <!-- フッター（枠の外へ） -->
+    <footer class="footer-area">
+        <div class="affiliate-box">
+            <script type="text/javascript">rakuten_design="slide";rakuten_affiliateId="47f67ba0.34b43d0d.47f67ba1.f8c0f51e";rakuten_items="ctsmatch";rakuten_genreId="0";rakuten_size="468x160";rakuten_target="_blank";rakuten_theme="gray";rakuten_border="off";rakuten_auto_mode="on";rakuten_genre_title="off";rakuten_recommend="on";rakuten_ts="1777998872007";</script><script type="text/javascript" src="https://xml.affiliate.rakuten.co.jp/widget/js/rakuten_widget.js?20230106"></script>
+        </div>
+        <p class="copyright">&copy; 2024 mofu-mitsu All Rights Reserved.</p>
+    </footer>
+
+    <!-- モーダル -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>✨ 使い方 ✨</h2>
+            <ul>
+                <li><strong>🔧 カスタム:</strong> 各パーツを選んでね！</li>
+                <li><strong>🔗 左右連動:</strong> 左を変えると右も自動で変わるよ！</li>
+                <li><strong>✏️ 直接編集:</strong> 上の顔文字は直接タイピングOK！</li>
+                <li><strong>🔥 アクション:</strong> 必殺技を作ろう！</li>
+                <li><strong>🎲 ランダム:</strong> カオス顔を楽しもう！</li>
+            </ul>
+            <button class="btn btn-primary" onclick="closeModal()" style="margin-top: 15px;">OK!</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
