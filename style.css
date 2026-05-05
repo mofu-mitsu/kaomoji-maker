@@ -30,9 +30,63 @@ body {
 h1 { color: #ff6b81; font-size: 26px; margin: 0; text-shadow: 2px 2px 0px #ffe4e1; }
 .btn-help { background: #fff; border: 2px solid #ffb6c1; color: #ff6b81; padding: 8px 15px; border-radius: 50px; font-weight: bold; cursor: pointer; }
 
-.preview-box { background: #fff; border: 4px dashed #ffb6c1; border-radius: 20px; padding: 25px; text-align: center; margin-bottom: 25px; }
-.preview-input { width: 100%; font-size: 42px; font-weight: 900; text-align: center; border: none; background: transparent; color: #ff4757; font-family: inherit; margin-bottom: 20px; outline: none; }
+/* プレビューエリアの外枠 */
+.preview-box {
+    background: #fff;
+    border: 4px dashed #ffb6c1;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: inset 0 0 15px rgba(255, 182, 193, 0.2);
+    
+    /* 🌟 ここがポイント：横にはみ出た時にスクロールさせる */
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    /* 🌟 スムーズなスクロール（スマホ用） */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* プレビューの入力欄本体 */
+.preview-input {
+    /* 🌟 横幅を固定せず、中身の長さに合わせる */
+    width: max-content;
+    min-width: 100%;
+    
+    font-size: 38px; /* 文字サイズはしっかり大きくキープ！ */
+    font-weight: 900;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: #ff4757;
+    font-family: inherit;
+    margin-bottom: 15px;
+    outline: none;
+
+    /* 🌟 折り返さないように設定 */
+    white-space: nowrap;
+    
+    padding: 10px 20px;
+}
+
+/* 🌟 スクロールバーを可愛くする（Chrome, Safari用） */
+.preview-box::-webkit-scrollbar {
+    height: 8px;
+}
+.preview-box::-webkit-scrollbar-track {
+    background: #fff5f7;
+    border-radius: 10px;
+}
+.preview-box::-webkit-scrollbar-thumb {
+    background: #ffb6c1;
+    border-radius: 10px;
+}
+.preview-box::-webkit-scrollbar-thumb:hover {
+    background: #ff6b81;
+}
 .action-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 .btn { border: none; padding: 12px 18px; border-radius: 50px; cursor: pointer; font-size: 14px; font-weight: bold; color: white; box-shadow: 0 4px 0 rgba(0,0,0,0.1); }
 .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.1); }
