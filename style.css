@@ -209,3 +209,55 @@ h1 { color: #ff6b81; font-size: 26px; margin: 0; text-shadow: 2px 2px 0px #ffe4e
     .flex-box { flex-direction: column; }
     .flex-box select, .flex-box button, .flex-box input { width: 100%; box-sizing: border-box; }
 }
+.section-title {
+    margin-top: 30px;    /* 上のセクションとの間隔 */
+    margin-bottom: 5px;  /* 下のボックスとの間隔を狭く！ */
+    padding-bottom: 5px;
+}
+
+.flex-box {
+    margin-top: 0px;     /* ボックス自体の上の余白をゼロに */
+    padding: 15px;       /* 中の余白を少し調整 */
+}
+
+/* --- アクション・ランダム内のドロップダウン＆入力欄の見た目 --- */
+.flex-box select, 
+.flex-box input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #dfe4ea;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    color: #2f3542;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box; /* はみ出し防止 */
+    transition: 0.2s;
+    appearance: none; /* ブラウザ標準の矢印をリセット（必要なら） */
+    -webkit-appearance: none;
+}
+
+/* ドロップダウンに可愛い矢印を付ける（任意） */
+.flex-box select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b81'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 35px;
+}
+
+.flex-box select:focus, 
+.flex-box input:focus {
+    border-color: #ff6b81;
+    background-color: #fff5f7;
+    box-shadow: 0 0 8px rgba(255, 107, 129, 0.2);
+}
+
+/* スマホで縦に並んだ時の間隔 */
+@media screen and (max-width: 768px) {
+    .flex-box {
+        gap: 10px;
+    }
+}
