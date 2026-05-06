@@ -278,3 +278,25 @@ h2.section-title {
     margin-top: 0 !important;       /* タイトルとの隙間を強制ゼロ */
     padding: 20px !important;       /* 中の余裕はキープ */
 }
+h2.section-title {
+    display: flex;
+    justify-content: space-between; /* 左右に要素がある時は離す（カスタム用） */
+    align-items: center;
+    margin-top: 30px !important;
+    margin-bottom: 0 !important;   /* 下の隙間をゼロに */
+    padding-bottom: 5px !important;
+    height: auto !important;       /* 高さを自動に */
+    min-height: 0 !important;      /* 余計な高さを出さない */
+}
+
+/* 🌟 アイコンと文字をくっつける設定 */
+h2.section-title span {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* アイコンと文字の間の隙間 */
+}
+
+/* ボックス側の調整 */
+.flex-box.template-box {
+    margin-top: 5px !important;    /* タイトルの下線との微調整（お好みで0でもOK） */
+}
