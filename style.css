@@ -261,3 +261,20 @@ h1 { color: #ff6b81; font-size: 26px; margin: 0; text-shadow: 2px 2px 0px #ffe4e
         gap: 10px;
     }
 }
+h2.section-title {
+    margin-top: 35px !important;    /* 上（カスタムエリア）との間隔 */
+    margin-bottom: 0 !important;    /* 下（ボックス）との隙間をゼロに！ */
+    padding-bottom: 8px !important; /* 下線の微調整 */
+    line-height: 1 !important;      /* 行の高さを最小限に */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;    /* 左寄せに固定 */
+    gap: 10px;                      /* アイコンと文字の間隔 */
+}
+
+/* ボックス部分の余白を完全にリセット */
+.flex-box.template-box, 
+.flex-box.random-box {
+    margin-top: 0 !important;       /* タイトルとの隙間を強制ゼロ */
+    padding: 20px !important;       /* 中の余裕はキープ */
+}
